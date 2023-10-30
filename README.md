@@ -24,15 +24,17 @@
 
 #### Ответ на задание 1.
 
-- 
-```bash
-rsync -a ~ /tmp/backup/
-```
+- ```bash rsync -a ~ /tmp/backup/ ```
 
 ![1st_com](img/zadanie1/01_01.png)
 
-- ```bash rsync -a ~ --exclude ```
+- ```bash rsync -a --exclude '.*/' ~ /tmp/backup/ ```
 
+![exc_hidir](img/zadanie1/01_02.png)
+
+- ```bash rsync -av --checksum --exclude '.*/'  ~ /tmp/backup/ ```
+
+![rsync_checksum](img/zadanie1/01_03.png)
 
 ### Задание 2
 - Написать скрипт и настроить задачу на регулярное резервное копирование домашней директории пользователя с помощью rsync и cron.
