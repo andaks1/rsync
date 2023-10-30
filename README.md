@@ -43,6 +43,57 @@
 - Резервная копия размещается локально, в директории `/tmp/backup`
 - На проверку направить файл crontab и скриншот с результатом работы утилиты.
 
+#### Ответ на задание 2.
+
+- crontab файл:
+```bash
+crontab -l
+# Edit this file to introduce tasks to be run by cron.
+# 
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+# 
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').
+# 
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+# 
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+# 
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+# 
+# For more information see the manual pages of crontab(5) and cron(8)
+# 
+# m h  dom mon dow   command
+23 18 * * * bash /home/andaks/zerkalo_home.sh
+```
+
+- текст скрипта:
+
+```bash
+#!/bin/bash
+
+rsync -a  /home/andaks/ /tmp/backup/
+stat=$?
+
+if [[ $stat -eq 0 ]]; then
+	logger "RSYNC home directory was SUCCESSFUL"
+else
+	logger "RSYNC home directory WAS NOT successful"
+fi
+```
+
+- Результат работы скрипта:
+![tmp_screen](img/zadanie2/02_01.png)
+
+- Запись в системном лог файле:
+![log_screen](img/zadanie2/02_02.png)
 
 ---
 
